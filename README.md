@@ -5,7 +5,7 @@ Standart bir Node'un yanı sıra, **Lifecycle Node** kullanarak bir Node’un a�
 
 Bir **Lifecycle Node**, ilk başlatıldığında `Unconfigured` durumundadır. Bu aşamada, Node başlatılmıştır ancak henüz aktif bir görev yapmaz. Aşağıdaki şemada her bir state ve geçiş görevi açıklanmaktadır (Şekil 1.1). Bu senaryo, belirlenen lifecycle aşamaları dışına çıkmadan Node yönetimi sağlar.
 
-![Lifecycle Node Şeması](link-to-image)
+![Lifecycle Node Şeması](https://github.com/ertugrulsalih/ROS2-LifecycleNode-Info-TR/blob/main/img/life_cycle_sm.png?raw=true)
 
 ## Örnek Senaryo: Kamera Konfigürasyonu
 Bir robotun nesne algılama ve engellerden kaçınma işlevlerini yerine getirmesi için bir kameraya bağlı olduğunu düşünelim. Güvenilir verilerin sağlanabilmesi için kamera yapılandırması son derece önemlidir. Bu noktada, standart bir Node yerine bir **Lifecycle Node** kullanarak, kameranın çözünürlük, kare hızı ve pozlama gibi parametrelerini yapılandırabiliriz. Ayrıca, kamera verilerini, algılama ve engellerden kaçınma bileşenlerine güvenilir bir şekilde yayınlayabiliriz.
@@ -13,8 +13,13 @@ Bir robotun nesne algılama ve engellerden kaçınma işlevlerini yerine getirme
 Bu yaklaşım, kamera Node'unun doğru şekilde kurulmasını ve verilerinin güvenilir olmasını sağlayarak, yaşam döngüsünün daha etkili bir şekilde yönetilmesine olanak tanır.
 
 ## Örnek Senaryo: ROS Navigation Stack
-![Lifecycle Node Şeması](link-to-image)
-**ROS Navigation Stack**, map server, cost map generator, local planner ve global planner gibi çeşitli bileşenleri içeren, robotik navigasyon için yaygın olarak kullanılan bir yazılım paketidir. Bu bileşenlerin belirli bir sırayla başlatılması ve durdurulması gerekir ve genel navigasyon sisteminin düzgün çalışması için yaşam döngülerinin koordine edilmesi kritik öneme sahiptir. Örneğin, map server ve sensör topic’lerinin, cost map ve planner düğümlerinden önce yüklenmesi gerekmektedir. ROS 2 Lifecycle Node API'si ile, her bileşen için başlatma, kapatma ve durumlar arası geçişler için gerekli adımları içeren bir lifecycle state machine tanımlayabilirsiniz. Bu sayede, Navigasyon Yığını bileşenlerinin doğru sırada başlatılmasını ve kapatılmasını sağlayarak, sistemin stabil ve güvenilir bir şekilde çalışmasını temin edebilirsiniz.
+
+![Lifecycle Node Şeması](https://github.com/ertugrulsalih/ROS2-LifecycleNode-Info-TR/blob/main/img/nav_stack.png?raw=true)
+
+**ROS Navigation Stack**, map server, cost map generator, local planner ve global planner gibi çeşitli bileşenleri içeren, robotik navigasyon için yaygın olarak kullanılan bir yazılım paketidir. 
+Bu bileşenlerin belirli bir sırayla başlatılması ve durdurulması gerekir ve genel navigasyon sisteminin düzgün çalışması için yaşam döngülerinin koordine edilmesi kritik öneme sahiptir. Örneğin, map server ve sensör topic’lerinin, cost map ve planner düğümlerinden önce yüklenmesi gerekmektedir. ROS 2 Lifecycle Node API'si ile, her bileşen için başlatma, kapatma ve durumlar arası geçişler için gerekli adımları içeren bir lifecycle state machine tanımlayabilirsiniz. 
+Bu sayede, Navigasyon Yığını bileşenlerinin doğru sırada başlatılmasını ve kapatılmasını sağlayarak, sistemin stabil ve güvenilir bir şekilde çalışmasını temin edebilirsiniz.
+
 ROS 2 Lifecycle Node, bileşenlerin başlatılması ve kapatılmasının yanı sıra, navigasyon yığınının yeniden yapılandırılması veya çevresel değişiklikler gibi runtime olaylarını da yönetmek için kullanılabilir. Örneğin, robotun gezinmesi sırasında yeni bir engelle karşılaşılması durumunda, cost map generator’ın bu yeni engeli hesaba katmak için yeniden yapılandırılması gerekebilir. ROS 2 Lifecycle Node API'sini kullanarak, diğer bileşenlerin çalışmaya devam etmesini sağlarken, bu yeniden yapılandırmayı gerçekleştirecek bir durum geçişi tanımlayabilirsiniz.
 
 
